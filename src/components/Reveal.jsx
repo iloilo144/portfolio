@@ -10,7 +10,7 @@ export default function Reveal({ as: Tag = 'div', children, on = 'scroll', delay
   const ref = useRef(null)
 
   useGSAP(
-    () => {
+    (context, contextSafe) => {
       const el = ref.current
       if (prefersReducedMotion()) {
         gsap.from(el, {
@@ -43,7 +43,7 @@ export default function Reveal({ as: Tag = 'div', children, on = 'scroll', delay
           },
         })
       }
-      if (on === 'intro') onIntroDone(run)
+      if (on === 'intro') onIntroDone(contextSafe(run))
       else run()
       return () => split?.revert()
     },

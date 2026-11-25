@@ -33,7 +33,7 @@ export default function Hero() {
   const root = useRef(null)
 
   useGSAP(
-    () => {
+    (context, contextSafe) => {
       // once the lines have slid in, drop their clipping masks so swelling letters are never cut off
       const ready = () => root.current?.querySelector('.hero__title')?.classList.add('is-ready')
       if (prefersReducedMotion()) {
@@ -42,14 +42,15 @@ export default function Hero() {
         return
       }
       gsap.set('.hero__line > span, .hero__fade', { autoAlpha: 0 })
-      onIntroDone(() => {
+      // contextSafe keeps these tweens in the hero's own context, so nothing else can revert them
+      onIntroDone(contextSafe(() => {
         const tl = gsap.timeline({ onComplete: ready })
         tl.set('.hero__line > span', { autoAlpha: 1 })
           .from('.hero__line > span', { yPercent: 115, rotate: 2, duration: 1.4, stagger: 0.1, ease: 'expo.out' })
           .from('.hero__pill', { scale: 0, duration: 1.2, ease: 'elastic.out(1, 0.6)' }, 0.35)
           .to('.hero__fade', { autoAlpha: 1, duration: 1, stagger: 0.08, ease: 'power2.out' }, 0.5)
           .from('.hero__fade', { y: 24, duration: 1.2, stagger: 0.08 }, 0.5)
-      })
+      }))
 
       // as you scroll away, the headline drifts up and dims, like a title card fading out
       gsap.to('.hero__title', {

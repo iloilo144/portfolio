@@ -52,8 +52,14 @@ export function onIntroDone(cb) {
   else waiting.push(cb)
 }
 export function finishIntro() {
+  if (introDone) return
   introDone = true
-  waiting.splice(0).forEach((cb) => cb())
+  // Run the waiting callbacks on the next tick. finishIntro is usually called from inside the
+  // preloader's timeline, and GSAP adds anything created during that callback to the preloader's
+  // context. When the preloader unmounts it reverts its context, which would silently undo the
+  // hero's entrance and leave the headline invisible.
+  const callbacks = waiting.splice(0)
+  setTimeout(() => callbacks.forEach((cb) => cb()), 0)
 }
 
 export { gsap, ScrollTrigger, SplitText, useGSAP }
