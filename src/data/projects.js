@@ -17,8 +17,8 @@ export const projects = [
     name: 'LocalLoop',
     category: 'Community marketplace',
     year: '2026',
-    liveUrl: '',
-    repoUrl: '',
+    liveUrl: 'https://localloop-gamma.vercel.app',
+    repoUrl: 'https://github.com/iloilo144/localloop',
     localUrl: 'http://localhost:5174',
     tagline: 'A neighbourhood sharing platform for lending and borrowing everyday things.',
     description:
@@ -54,8 +54,8 @@ export const projects = [
     name: 'Proofboard',
     category: 'Freelancer collaboration SaaS',
     year: '2026',
-    liveUrl: '',
-    repoUrl: '',
+    liveUrl: 'https://proofboard-seven.vercel.app',
+    repoUrl: 'https://github.com/iloilo144/proofboard',
     localUrl: 'http://localhost:5175',
     tagline: 'A shared workspace where freelancers and clients review, discuss and approve work.',
     description:
@@ -91,8 +91,8 @@ export const projects = [
     name: 'ShelfLife',
     category: 'Productivity · Food waste',
     year: '2026',
-    liveUrl: '',
-    repoUrl: '',
+    liveUrl: 'https://shelflife-brown-three.vercel.app',
+    repoUrl: 'https://github.com/iloilo144/shelflife',
     localUrl: 'http://localhost:5176',
     tagline: 'A kitchen journal that tracks expiry dates and suggests what to cook first.',
     description:
@@ -127,8 +127,8 @@ export const projects = [
     name: 'Form & Found',
     category: 'Architecture studio landing page',
     year: '2026',
-    liveUrl: '',
-    repoUrl: '',
+    liveUrl: 'https://form-and-found-iota.vercel.app',
+    repoUrl: 'https://github.com/iloilo144/form-and-found',
     localUrl: 'http://localhost:5177',
     tagline: 'A premium landing page for a fictional architecture and interiors studio.',
     description:

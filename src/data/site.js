@@ -19,5 +19,5 @@ export const site = {
 
   formEndpoint: '',
 
-  siteUrl: '', // e.g. 'https://your-name.vercel.app'
+  siteUrl: 'https://portfolio-beta-gilt-2tyi5pjln6.vercel.app',
 }

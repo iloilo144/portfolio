@@ -8,7 +8,7 @@ contact form.
 masked line reveals, a pinned sideways project strip, a velocity-reactive marquee, magnetic buttons, a custom
 cursor and page-to-page curtain wipes. All of it is skipped for visitors who prefer reduced motion.
 
-> Live site: _add your Vercel URL here_
+> Live site: [portfolio-beta-gilt-2tyi5pjln6.vercel.app](https://portfolio-beta-gilt-2tyi5pjln6.vercel.app)
 
 ## Edit your details
 
