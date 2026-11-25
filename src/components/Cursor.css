@@ -1,0 +1,46 @@
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  width: 4.75rem;
+  height: 4.75rem;
+  margin: -2.375rem 0 0 -2.375rem;
+  border-radius: 50%;
+  background: var(--text);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transform-origin: center;
+  scale: 0.14;
+  transition: scale 0.5s var(--ease), background 0.4s, opacity 0.3s;
+}
+
+.cursor__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #0b0b0c;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.cursor--link {
+  scale: 0.38;
+}
+
+.cursor--view {
+  scale: 1;
+  mix-blend-mode: normal;
+  background: var(--accent);
+}
+
+.cursor--view .cursor__label {
+  opacity: 1;
+}
+
+.cursor--hide,
+.cursor--hidden {
+  opacity: 0;
+}

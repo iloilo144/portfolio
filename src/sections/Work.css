@@ -1,0 +1,297 @@
+.work {
+  padding-top: clamp(6rem, 12vw, 10rem);
+}
+
+.work__head {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem 1.5rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.work__head .eyebrow {
+  grid-column: 1 / -1;
+}
+
+.work__title {
+  grid-column: 1 / 9;
+  font-size: clamp(2.6rem, 6.2vw, 6rem);
+}
+
+.work__intro {
+  grid-column: 9 / 13;
+  align-self: end;
+  color: var(--muted);
+}
+
+.work__pin {
+  position: relative;
+}
+
+.work__track {
+  display: flex;
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  width: max-content;
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+
+.wcard {
+  flex: none;
+  display: grid;
+  align-content: start;
+  gap: 1.5rem;
+  width: min(68vw, 60rem);
+}
+
+.wcard__media {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* a coloured stage in the project's own palette; the screenshot peeks up from the bottom */
+.wcard__frame {
+  position: relative;
+  display: block;
+  height: min(58vh, 36rem);
+  padding: 7% 8% 0;
+  overflow: hidden;
+  background: var(--card-bg);
+  transition: padding 0.8s var(--ease);
+}
+
+.wcard__img,
+.wcard__frame .shot-fallback {
+  width: 112%;
+  margin-left: -6%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.45);
+  transition: transform 1s var(--ease);
+}
+
+.wcard__media:hover .wcard__frame {
+  padding-top: 5%;
+}
+
+.wcard__media:hover .wcard__img {
+  transform: scale(1.015);
+}
+
+.wcard__info {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.wcard__num {
+  padding-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--card-accent);
+  filter: brightness(1.6);
+}
+
+.wcard h3 {
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+}
+
+.wcard h3 a {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
+  transition: background-size 0.6s var(--ease);
+}
+
+.wcard h3 a:hover {
+  background-size: 100% 2px;
+}
+
+.wcard__tagline {
+  margin-top: 0.75rem;
+  max-width: 28rem;
+  color: var(--muted);
+}
+
+.wcard__side {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: end;
+  text-align: right;
+}
+
+.wcard__cat {
+  font-size: 0.9rem;
+}
+
+.wcard__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wcard__tags li {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.plinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+}
+
+.plinks__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+.plinks__link svg {
+  color: var(--accent);
+  transition: transform 0.5s var(--ease);
+}
+
+.plinks__link:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.wcard--end {
+  width: min(40vw, 30rem);
+  align-content: center;
+  justify-items: start;
+  padding: 3rem;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--radius);
+}
+
+.wcard__endtitle {
+  font-family: var(--display);
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.work__progress {
+  margin-top: 2.5rem;
+}
+
+.work__progress span {
+  display: block;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  box-shadow: 0 0 0 0.5px var(--line);
+}
+
+/* smaller screens: a normal vertical stack */
+@media (max-width: 1023px) {
+  .work__title,
+  .work__intro {
+    grid-column: 1 / -1;
+  }
+
+  .work__track {
+    flex-direction: column;
+    width: auto;
+    gap: 4.5rem;
+  }
+
+  .wcard,
+  .wcard--end {
+    width: 100%;
+  }
+
+  .wcard__frame {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .work__progress {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .wcard__info {
+    grid-template-columns: auto 1fr;
+  }
+
+  .wcard__side {
+    grid-column: 1 / -1;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .wcard__tags {
+    justify-content: flex-start;
+  }
+
+  .wcard--end {
+    padding: 2rem;
+  }
+}
+
+/* calm mode: no pinned sideways strip, just a generous vertical stack */
+html[data-motion='calm'] .work__track {
+  flex-direction: column;
+  width: auto;
+  gap: 4.5rem;
+}
+
+html[data-motion='calm'] .wcard,
+html[data-motion='calm'] .wcard--end {
+  width: 100%;
+}
+
+html[data-motion='calm'] .wcard__frame {
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+html[data-motion='calm'] .work__progress {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------
+   Card tilt + light sheen that follows the pointer
+   --------------------------------------------------------------------- */
+.wcard__media {
+  perspective: 1200px;
+}
+
+.wcard__frame {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.9s var(--ease), padding 0.8s var(--ease);
+  will-change: transform;
+}
+
+.wcard__media.is-tilting .wcard__frame {
+  transition: transform 0.25s ease-out, padding 0.8s var(--ease);
+}
+
+.wcard__frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--sx, 50%) var(--sy, 0%), rgba(255, 255, 255, 0.28), transparent 55%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.6s;
+  pointer-events: none;
+}
+
+.wcard__media:hover .wcard__frame::after {
+  opacity: 1;
+}

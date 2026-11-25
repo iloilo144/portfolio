@@ -1,0 +1,35 @@
+.marquee {
+  overflow: hidden;
+  padding-block: clamp(1.25rem, 3vw, 2.25rem);
+  border-block: 1px solid var(--line);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 6vw, 5.25rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.marquee__item:nth-child(even) {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-2);
+}
+
+.marquee__sep {
+  width: 0.28em;
+  height: 0.28em;
+  margin-inline: 0.55em;
+  border-radius: 50%;
+  background: var(--accent);
+}

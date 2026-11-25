@@ -1,0 +1,254 @@
+.contact {
+  padding-top: clamp(7rem, 14vw, 12rem);
+}
+
+.contact__title {
+  margin-top: 1.5rem;
+  max-width: 62rem;
+  font-size: clamp(3rem, 8vw, 8rem);
+}
+
+.contact__title span {
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+}
+
+.contact__info {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 2rem;
+}
+
+.contact__info > p {
+  max-width: 26rem;
+  color: var(--muted);
+}
+
+/* the big round "write to me" button */
+.contact__orb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0.4rem;
+  width: clamp(10rem, 16vw, 13rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.contact__orb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--text);
+  transform: scale(0);
+  transition: transform 0.7s var(--ease);
+}
+
+.contact__orb:hover::before {
+  transform: scale(1);
+}
+
+.contact__orb svg {
+  transition: transform 0.6s var(--ease);
+}
+
+.contact__orb:hover svg {
+  transform: rotate(45deg);
+}
+
+.contact__email {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contact__email a {
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  letter-spacing: -0.02em;
+}
+
+.contact__email button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.contact__email button:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+/* Form: floating labels and an underline that draws in on focus */
+.cform {
+  display: grid;
+  gap: 2.25rem;
+}
+
+.cform__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.cfield {
+  position: relative;
+  display: grid;
+}
+
+.cfield input,
+.cfield textarea {
+  width: 100%;
+  padding: 1.6rem 0 0.7rem;
+  border: 0;
+  border-bottom: 1px solid var(--line-2);
+  border-radius: 0;
+  background: transparent;
+  font-size: 1.15rem;
+  outline: none;
+}
+
+.cfield textarea {
+  resize: vertical;
+}
+
+.cfield label {
+  position: absolute;
+  left: 0;
+  top: 1.6rem;
+  color: var(--muted);
+  font-size: 1.15rem;
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform 0.5s var(--ease), color 0.3s;
+}
+
+.cfield input:focus + label,
+.cfield input:not(:placeholder-shown) + label,
+.cfield textarea:focus + label,
+.cfield textarea:not(:placeholder-shown) + label {
+  transform: translateY(-1.45rem) scale(0.72);
+  color: var(--text);
+}
+
+.cfield__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% - 1px);
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.7s var(--ease);
+}
+
+.cfield:focus-within .cfield__line,
+.cfield.has-error .cfield__line {
+  transform: scaleX(1);
+}
+
+.cfield:has(textarea) .cfield__line {
+  top: auto;
+  bottom: 0.35rem;
+}
+
+.cfield__error {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #ff8a6a;
+}
+
+.cform__foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.cform__foot .btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.cform__note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.contact__state {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.contact__state a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.contact__state--error {
+  border-color: rgba(255, 138, 106, 0.4);
+}
+
+.contact__state--ok {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  align-content: start;
+  padding: 2.5rem;
+  color: var(--text);
+}
+
+.contact__state--ok svg {
+  color: #3ddc84;
+}
+
+.contact__state--ok h3 {
+  font-size: 2.4rem;
+}
+
+.contact__state--ok p {
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .cform__row {
+    grid-template-columns: 1fr;
+  }
+}

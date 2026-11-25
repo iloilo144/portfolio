@@ -1,0 +1,349 @@
+:root {
+  --bg: #0b0b0c;
+  --bg-2: #141416;
+  --bg-3: #1c1c1f;
+  --line: rgba(237, 234, 228, 0.12);
+  --line-2: rgba(237, 234, 228, 0.22);
+  --text: #edeae4;
+  --muted: #8d8a84;
+  --accent: #ff5b2e;
+  --accent-soft: rgba(255, 91, 46, 0.14);
+
+  --display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  --body: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --max: 1440px;
+  --gutter: clamp(1.25rem, 3.5vw, 3rem);
+  --radius: 18px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+/* Film grain: one tiny SVG noise tile, fixed over everything, never intercepts clicks */
+body::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1.2s steps(6) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: fixed;
+  top: -4rem;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--bg);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* SplitText line masks: lines slide up from behind an invisible edge */
+.split-line {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Pill buttons */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 3.25rem;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  font-weight: 500;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+
+/* a fill that rises from the bottom on hover */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--text);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease);
+}
+
+.btn:hover {
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.btn:hover::before {
+  transform: none;
+}
+
+.btn--solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.btn--solid::before {
+  background: var(--text);
+}
+
+.btn svg {
+  transition: transform 0.5s var(--ease);
+}
+
+.btn:hover svg {
+  transform: translate(2px, -2px) rotate(0deg);
+}
+
+/* Links whose text rolls upward on hover (RollText component) */
+.roll {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.roll__inner {
+  display: inline-flex;
+  flex-direction: column;
+  transition: transform 0.55s var(--ease);
+}
+
+.roll__inner > span:last-child {
+  position: absolute;
+  top: 100%;
+}
+
+a:hover .roll__inner,
+button:hover .roll__inner,
+a:focus-visible .roll__inner {
+  transform: translateY(-100%);
+}
+
+.pending {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* Calm mode keeps hovers, fades and colour changes; it only stops ambient movement. */
+html[data-motion='calm'] body::after {
+  animation: none;
+}
+
+/* ---------------------------------------------------------------------
+   Ambient light: a soft glow that follows the pointer across the dark page
+   --------------------------------------------------------------------- */
+.glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(560px circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 91, 46, 0.085), transparent 62%),
+    radial-gradient(900px circle at var(--gx, 50%) var(--gy, 30%), rgba(237, 234, 228, 0.03), transparent 70%);
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+
+.glow.is-on {
+  opacity: 1;
+}
+
+/* Motion toggle (in the nav and the mobile menu) */
+.motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  height: 2.75rem;
+  padding: 0 0.95rem 0 0.8rem;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  transition: color 0.35s, border-color 0.35s, background 0.35s;
+}
+
+.motion-toggle:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+/* three little bars that dance in full motion and lie flat in calm mode */
+.motion-toggle__bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.motion-toggle__bars span {
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transform-origin: bottom;
+  animation: bars 1.1s var(--ease) infinite alternate;
+}
+
+.motion-toggle__bars span:nth-child(2) {
+  animation-delay: -0.4s;
+}
+
+.motion-toggle__bars span:nth-child(3) {
+  animation-delay: -0.8s;
+}
+
+@keyframes bars {
+  from {
+    transform: scaleY(0.25);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+html[data-motion='calm'] .motion-toggle__bars span {
+  animation: none;
+  transform: scaleY(0.3);
+  background: var(--muted);
+}
