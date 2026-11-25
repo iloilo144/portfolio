@@ -252,3 +252,25 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Browser autofill paints its own pale background and dark text. A huge inset shadow covers that
+   paint in the page colour, and the endless background transition stops Chrome flashing it back. */
+.cfield input:-webkit-autofill,
+.cfield input:-webkit-autofill:hover,
+.cfield input:-webkit-autofill:focus,
+.cfield textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  caret-color: var(--text);
+  box-shadow: 0 0 0 100px var(--bg) inset;
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.cfield input:autofill {
+  box-shadow: 0 0 0 100px var(--bg) inset;
+  -webkit-text-fill-color: var(--text);
+}
+
+.cfield input:-webkit-autofill + label {
+  transform: translateY(-1.45rem) scale(0.72);
+  color: var(--text);
+}

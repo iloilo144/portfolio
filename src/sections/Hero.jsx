@@ -8,17 +8,25 @@ import Magnetic from '../components/Magnetic'
 import Shot from '../components/Shot'
 import './Hero.css'
 
-/** Splits text into letters so each one can swell (variable font weight) as the mouse passes over it. */
+/**
+ * Splits text into letters so each one can swell (variable font weight) as the mouse passes over it.
+ * Letters are grouped into unbreakable words, so a line can only ever wrap between words,
+ * never in the middle of one.
+ */
 function Letters({ children }) {
-  return children.split('').map((ch, i) =>
-    ch === ' ' ? (
-      ' '
-    ) : (
-      <span key={i} className="hero__char" aria-hidden="true">
-        {ch}
+  const words = children.split(' ')
+  return words.map((word, w) => (
+    <span key={w}>
+      <span className="hero__word" aria-hidden="true">
+        {word.split('').map((ch, i) => (
+          <span key={i} className="hero__char">
+            {ch}
+          </span>
+        ))}
       </span>
-    ),
-  )
+      {w < words.length - 1 && ' '}
+    </span>
+  ))
 }
 
 export default function Hero() {
@@ -26,13 +34,16 @@ export default function Hero() {
 
   useGSAP(
     () => {
+      // once the lines have slid in, drop their clipping masks so swelling letters are never cut off
+      const ready = () => root.current?.querySelector('.hero__title')?.classList.add('is-ready')
       if (prefersReducedMotion()) {
+        ready()
         gsap.from('.hero__line > span, .hero__fade, .hero__pill', { autoAlpha: 0, duration: 1.6, stagger: 0.12, ease: 'power2.out' })
         return
       }
       gsap.set('.hero__line > span, .hero__fade', { autoAlpha: 0 })
       onIntroDone(() => {
-        const tl = gsap.timeline()
+        const tl = gsap.timeline({ onComplete: ready })
         tl.set('.hero__line > span', { autoAlpha: 1 })
           .from('.hero__line > span', { yPercent: 115, rotate: 2, duration: 1.4, stagger: 0.1, ease: 'expo.out' })
           .from('.hero__pill', { scale: 0, duration: 1.2, ease: 'elastic.out(1, 0.6)' }, 0.35)

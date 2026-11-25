@@ -219,3 +219,20 @@
     font-variation-settings: 'wght' 450, 'opsz' 96;
   }
 }
+
+/* words never break apart; on desktop each headline line also stays on one row,
+   so a swelling letter can't push the end of a line down */
+.hero__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+@media (min-width: 700px) {
+  .hero__line > span {
+    white-space: nowrap;
+  }
+}
+
+.hero__title.is-ready .hero__line {
+  overflow: visible;
+}
